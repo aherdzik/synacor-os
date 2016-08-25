@@ -1,7 +1,8 @@
 ﻿import os
 import sys
 import struct
-
+from Tkinter import *
+import time
 
 cursor=0
 f = open("challenge.bin", "rb")
@@ -12,12 +13,14 @@ prgStack = []
 stringVal= ["halt", "set", "push", "pop", "eq", "gt", "jmp", "jt", "jf", "add", "mult", "mod", "and", "or", "not", "rmem", "wmem", "call", "ret", "out", "in", "noop"]
 curInput = []
 handlingInput= False
+inputText = []
+master = []
 
 def handleCommand(currentCommand):
-    global cursor
+    global cursor, inputText
     cursor= cursor+1
     if currentCommand == 0: # stop program
-        print("program halted at command " ,cursor-1)
+        printToScreen("program halted at command " ,cursor-1)
         input()
         sys.exit()
     elif currentCommand == 1: # set a to value of b
@@ -30,7 +33,7 @@ def handleCommand(currentCommand):
 
     elif currentCommand == 3: # remove element on stack and write to a, otherwise error
         if len(prgStack) ==0 :
-            print( "ERROR STACK POPPED WHILE EMPTY")
+            printToScreen( "ERROR STACK POPPED WHILE EMPTY")
         else:
             register[currentProgram[cursor]-32768] = prgStack.pop()
 
@@ -136,16 +139,17 @@ def handleCommand(currentCommand):
 
     elif currentCommand == 18:
         if len(prgStack) ==0 :
-            print( "ERROR STACK POPPED WHILE EMPTY")
+            printToScreen( "ERROR STACK POPPED WHILE EMPTY")
         else:
             popVal= prgStack.pop()
             cursor= popVal-1
 
     elif currentCommand == 19: # print character
         if getValue(cursor) <= 255:
-            sys.stdout.write(chr(getValue(cursor)))
+            #sys.stdout.write(chr(getValue(cursor)))
+            inputText.insert(END, chr(getValue(cursor)))
         else:
-            print("CHAR READER ERROR")
+            printToScreen("CHAR READER ERROR")
 
     elif currentCommand == 20: # read a character from the terminal and write its ascii code to <a>; it can be assumed that once input starts, it will continue until a newline is encountered; this means that you can safely read whole lines from the keyboard and trust that they will be fully read
         targetReg= currentProgram[cursor] - 32768
@@ -162,7 +166,7 @@ def handleCommand(currentCommand):
         cursor= cursor-1
     else:
         cursor= cursor-1
-        print("unhandled command:" ,currentProgram[cursor], " at command " ,cursor)
+        printToScreen("unhandled command:" ,currentProgram[cursor], " at command " ,cursor)
 
 def saveState():
     global cursor
@@ -172,7 +176,7 @@ def saveState():
     f.close()
 def printInRange(min, max):
     for i in range (min, max):
-        print("currentProgram[",i,"] = ", currentProgram[i])
+        printToScreen("currentProgram[",i,"] = ", currentProgram[i])
 
 def getValue(val):
     currentVal= currentProgram[val]
@@ -181,8 +185,30 @@ def getValue(val):
     elif currentVal in range(32768,32776):
         return register[currentVal-32768]
     else:
-        print("ERROR INVALID GET VALUE")
+        printToScreen("ERROR INVALID GET VALUE")
         return -1
+
+def printToScreen(line):
+    inputText.insert(END, line)
+
+def initGUI():
+    global inputText, master
+    master = Tk()
+    inputText= Text(master)
+    inputText.grid(row=0, column=1,pady=20)
+    x1 =Label(master, text="First").grid(row=1, pady=0)
+    e1 = Entry(master)
+    e1.grid(row=1, column=1)
+    master.after(10, mainEvent)
+    master.mainloop()
+
+
+def mainEvent():
+    global cursor,maxSize, currentProgram, root
+    while cursor <= maxSize/2:
+        master.update()
+        handleCommand(currentProgram[cursor])
+        cursor= cursor +1
 
 
 try:
@@ -191,24 +217,21 @@ try:
     currentProgram = []
     
     while x<=maxSize:
-        curByte= int.from_bytes(byte, byteorder='little')
+        #curByte= int.from_bytes(byte, byteorder='little')
 
-        #newbyte= byte[1]+byte[0]
-        #curByte = int(newbyte.encode('hex'), 16)
+        newbyte= byte[1]+byte[0]
+        curByte = int(newbyte.encode('hex'), 16)
 
         currentProgram.append(curByte)
         byte=f.read(2)
         x+=2
 except:
-    print("Unexpected error:", sys.exc_info()[0])
-    print("Unexpected error:", sys.exc_info()[1])
+    printToScreen("Unexpected error:", sys.exc_info()[0])
+    printToScreen("Unexpected error:", sys.exc_info()[1])
 
 finally:
     f.close()
     cursor=0
+    initGUI()
 
-    while cursor <= maxSize/2:
-        handleCommand(currentProgram[cursor])
-        cursor= cursor +1
-        
     
