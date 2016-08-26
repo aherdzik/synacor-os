@@ -1,7 +1,12 @@
 ﻿import os
 import sys
 import struct
-from Tkinter import *
+try:
+    # for Python2
+    from Tkinter import *   ## notice capitalized T in Tkinter 
+except ImportError:
+    # for Python3
+    from tkinter import *   ## notice lowercase 't' in tkinter here
 import time
 
 cursor=0
@@ -15,6 +20,7 @@ curInput = []
 handlingInput= False
 inputText = []
 master = []
+e1=[]
 
 def handleCommand(currentCommand):
     global cursor, inputText
@@ -148,6 +154,7 @@ def handleCommand(currentCommand):
         if getValue(cursor) <= 255:
             #sys.stdout.write(chr(getValue(cursor)))
             inputText.insert(END, chr(getValue(cursor)))
+            inputText.see(END)
         else:
             printToScreen("CHAR READER ERROR")
 
@@ -155,8 +162,9 @@ def handleCommand(currentCommand):
         targetReg= currentProgram[cursor] - 32768
         global curInput, handlingInput
         if handlingInput == False:
-            curInput= sys.stdin.readline()
-            handlingInput=True
+            wait()
+            #curInput= sys.stdin.readline()
+            #handlingInput=True
         if len(curInput) == 1:
             handlingInput=False
         register[targetReg]=ord(curInput[0])
@@ -174,6 +182,7 @@ def saveState():
     for i  in range(0, len(currentProgram)):
         f.write(struct.pack("<H", currentProgram[i]))
     f.close()
+
 def printInRange(min, max):
     for i in range (min, max):
         printToScreen("currentProgram[",i,"] = ", currentProgram[i])
@@ -188,17 +197,34 @@ def getValue(val):
         printToScreen("ERROR INVALID GET VALUE")
         return -1
 
+def wait():
+    global handlingInput
+    while False ==handlingInput:
+        master.update()
+
+def inputReceived():
+    global handlingInput, curInput
+    if False == handlingInput:
+        curInput= e1.get()
+        printToScreen(curInput)
+        curInput = curInput + '\n'
+        e1.delete(0,END)
+        handlingInput=True;
+
+
 def printToScreen(line):
     inputText.insert(END, line)
 
 def initGUI():
-    global inputText, master
+    global inputText, master, e1
     master = Tk()
+    master.bind('<Return>', inputReceived)
     inputText= Text(master)
-    inputText.grid(row=0, column=1,pady=20)
-    x1 =Label(master, text="First").grid(row=1, pady=0)
-    e1 = Entry(master)
-    e1.grid(row=1, column=1)
+    inputText.grid(row=0,pady=20)
+    x1 =Label(master, text="Input").grid(row=1, pady=0,sticky=W+S)
+    e1 = Entry(master, width=80)
+    e1.grid(row=2,column= 0, sticky=W+S)
+    b = Button(master, text="OK", command=inputReceived).grid(row=2,column= 0, sticky=E+S)
     master.after(10, mainEvent)
     master.mainloop()
 
@@ -217,17 +243,17 @@ try:
     currentProgram = []
     
     while x<=maxSize:
-        #curByte= int.from_bytes(byte, byteorder='little')
+        curByte= int.from_bytes(byte, byteorder='little')
 
-        newbyte= byte[1]+byte[0]
-        curByte = int(newbyte.encode('hex'), 16)
+        #newbyte= byte[1]+byte[0]
+        #curByte = int(newbyte.encode('hex'), 16)
 
         currentProgram.append(curByte)
         byte=f.read(2)
         x+=2
 except:
-    printToScreen("Unexpected error:", sys.exc_info()[0])
-    printToScreen("Unexpected error:", sys.exc_info()[1])
+    printToScreen(("Unexpected error:", sys.exc_info()[0]))
+    printToScreen(("Unexpected error:", sys.exc_info()[1]))
 
 finally:
     f.close()
