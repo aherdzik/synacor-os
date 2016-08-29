@@ -10,7 +10,6 @@ except ImportError:
 import time
 
 cursor=0
-f = open("challenge.bin", "rb")
 maxSize= int(os.path.getsize("challenge.bin"))
 currentProgram = []
 register = [0,0,0,0,0,0,0,0]
@@ -185,6 +184,9 @@ def saveState():
         f.write(struct.pack("<H", currentProgram[i]))
     f.close()
 
+def loadState():
+    global cursor
+
 def printInRange(min, max):
     for i in range (min, max):
         printToScreen("currentProgram[",i,"] = ", currentProgram[i])
@@ -226,7 +228,7 @@ def updateUI():
             registerInputs[i].insert(0,str(register[i]))
 
 def printToScreen(line):
-    inputText.insert(END, line)
+    inputText.insert(END, str(line))
 
 def initGUI():
     global inputText, master, e1, registerInputs,register,UIUpdate
@@ -252,19 +254,40 @@ def initGUI():
     UIUpdate=IntVar()
     checkUIUpdate = Checkbutton(rightFrame, text="Update variables", onvalue = 1, offvalue = 0, variable=UIUpdate)
     checkUIUpdate.pack(side=TOP)
-    registerFrame= Frame(rightFrame,width=1,relief=SUNKEN)
-    Label(rightFrame, text="Registers").pack(side=TOP)
-    for i in range (0,8):
-        registerInputs.append(Entry(registerFrame))
-        registerInputs[i].grid(row=int(i/2),column=int(i%2))
+    
+    #register updating area
+    registerFrame= Frame(rightFrame, bd=1,relief=SUNKEN)
     registerFrame.pack(side=TOP)
-    Button(rightFrame, text="Set Registers", command=setRegisters).pack(side=TOP)
-
+    registerInputFrame= Frame(registerFrame,width=1,relief=SUNKEN)
+    Label(registerFrame, text="Registers").pack(side=TOP)
+    for i in range (0,8):
+        registerInputs.append(Entry(registerInputFrame))
+        registerInputs[i].grid(row=int(i/2),column=int(i%2))
+    registerInputFrame.pack(side=TOP)
+    Button(registerFrame, text="Set Registers", command=setRegisters).pack(side=TOP)
 
 
     master.after(10, mainEvent)
-
     master.mainloop()
+
+def loadFile(fileName):
+    global f,currentProgram
+    f = open(fileName+ ".bin", "rb")
+    x= 2
+    byte = f.read(2)
+    currentProgram = []
+    
+    while x<=maxSize:
+        if sys.version_info > (3,0):
+            curByte= int.from_bytes(byte, byteorder='little')
+        else:
+            newbyte= byte[1]+byte[0]
+            curByte = int(newbyte.encode('hex'), 16)
+
+        currentProgram.append(curByte)
+        byte=f.read(2)
+        x+=2
+    f.close()
 
 
 def mainEvent():
@@ -277,25 +300,12 @@ def mainEvent():
 
 
 try:
-    x= 2
-    byte = f.read(2)
-    currentProgram = []
-    
-    while x<=maxSize:
-        curByte= int.from_bytes(byte, byteorder='little')
-
-        #newbyte= byte[1]+byte[0]
-        #curByte = int(newbyte.encode('hex'), 16)
-
-        currentProgram.append(curByte)
-        byte=f.read(2)
-        x+=2
+    loadFile('challenge')
 except:
     printToScreen(("Unexpected error:", sys.exc_info()[0]))
     printToScreen(("Unexpected error:", sys.exc_info()[1]))
 
 finally:
-    f.close()
     cursor=0
     initGUI()
 
