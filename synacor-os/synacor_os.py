@@ -20,7 +20,9 @@ curInput = []
 handlingInput= False
 inputText = []
 master = []
+registerInputs = []
 e1=[]
+UIUpdate= []
 
 def handleCommand(currentCommand):
     global cursor, inputText
@@ -203,7 +205,7 @@ def wait():
         master.update()
 
 def inputReceived():
-    global handlingInput, curInput
+    global handlingInput, curInput, e1
     if False == handlingInput:
         curInput= e1.get()
         printToScreen(curInput)
@@ -211,21 +213,57 @@ def inputReceived():
         e1.delete(0,END)
         handlingInput=True;
 
+def setRegisters():
+    global register,registerInputs
+    for i in range(0,8):
+        register[i]=int(registerInputs[i].get())
+
+def updateUI():
+    global curInput,register,registerInputs,UIUpdate
+    if 1== UIUpdate.get():
+        for i in range(0,8):
+            registerInputs[i].delete(0,END)
+            registerInputs[i].insert(0,str(register[i]))
 
 def printToScreen(line):
     inputText.insert(END, line)
 
 def initGUI():
-    global inputText, master, e1
+    global inputText, master, e1, registerInputs,register,UIUpdate
     master = Tk()
-    master.bind('<Return>', inputReceived)
-    inputText= Text(master)
-    inputText.grid(row=0,pady=20)
-    x1 =Label(master, text="Input").grid(row=1, pady=0,sticky=W+S)
-    e1 = Entry(master, width=80)
-    e1.grid(row=2,column= 0, sticky=W+S)
-    b = Button(master, text="OK", command=inputReceived).grid(row=2,column= 0, sticky=E+S)
+    
+    #left frame area
+    leftFrame= Frame(master,width=2,bd=1, relief=SUNKEN)
+    leftFrame.pack(side=LEFT)
+    inputText= Text(leftFrame)
+    inputText.bind("<Key>", lambda e: "break")
+    inputText.pack(side=TOP)
+    x1 =Label(leftFrame, text="Input").pack(side=TOP)
+    inputFrame= Frame(leftFrame,width=1)
+    e1 = Entry(inputFrame, width=80)
+    e1.bind("<Return>",(lambda event: inputReceived()))
+    e1.pack(side=LEFT)
+    b = Button(inputFrame, text="OK", command=inputReceived).pack(side=LEFT)
+    inputFrame.pack(side=BOTTOM)
+
+    #right frame area
+    rightFrame= Frame(master,width=2, bd=1,relief=SUNKEN)
+    rightFrame.pack(side=RIGHT)
+    UIUpdate=IntVar()
+    checkUIUpdate = Checkbutton(rightFrame, text="Update variables", onvalue = 1, offvalue = 0, variable=UIUpdate)
+    checkUIUpdate.pack(side=TOP)
+    registerFrame= Frame(rightFrame,width=1,relief=SUNKEN)
+    Label(rightFrame, text="Registers").pack(side=TOP)
+    for i in range (0,8):
+        registerInputs.append(Entry(registerFrame))
+        registerInputs[i].grid(row=int(i/2),column=int(i%2))
+    registerFrame.pack(side=TOP)
+    Button(rightFrame, text="Set Registers", command=setRegisters).pack(side=TOP)
+
+
+
     master.after(10, mainEvent)
+
     master.mainloop()
 
 
@@ -235,6 +273,7 @@ def mainEvent():
         master.update()
         handleCommand(currentProgram[cursor])
         cursor= cursor +1
+        updateUI()
 
 
 try:
