@@ -196,9 +196,11 @@ def getValue(val):
         return -1
 
 def wait():
-    global handlingInput,loadStateFlag, saveStateFlag
+    global handlingInput,loadStateFlag, saveStateFlag,cursor
     while False ==handlingInput and False==loadStateFlag and False==saveStateFlag:
         master.update()
+    if True==saveStateFlag:
+        cursor = cursor-2
 
 def inputReceived():
     global handlingInput, curInput, e1
