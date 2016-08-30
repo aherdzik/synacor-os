@@ -10,15 +10,15 @@ except ImportError:
 import time
 
 cursor=0
-maxSize= int(os.path.getsize("challenge.bin"))
 currentProgram = []
-register = [0,0,0,0,0,0,0,0]
+register = [-1,-1,-1,-1,-1,-1,-1,-1]
 prgStack = []
 stringVal= ["halt", "set", "push", "pop", "eq", "gt", "jmp", "jt", "jf", "add", "mult", "mod", "and", "or", "not", "rmem", "wmem", "call", "ret", "out", "in", "noop"]
 curInput = []
 handlingInput= False
 inputText = []
 master = []
+maxSize = []
 registerInputs = []
 e1=[]
 UIUpdate= []
@@ -270,13 +270,16 @@ def initGUI():
     master.after(10, mainEvent)
     master.mainloop()
 
-def loadFile(fileName):
-    global f,currentProgram
-    f = open(fileName+ ".bin", "rb")
+def loadFiles(fileName):
+    global f,currentProgram,maxSize,cursor,register,prgStack
+    fileLoc=("saves/" + fileName+ "/")
+    maxSize= int(os.path.getsize(fileLoc + fileName+  ".bin"))
+    f = open(fileLoc + fileName+  ".bin", "rb")
     x= 2
     byte = f.read(2)
     currentProgram = []
     
+    #loads the program data into memory
     while x<=maxSize:
         if sys.version_info > (3,0):
             curByte= int.from_bytes(byte, byteorder='little')
@@ -288,6 +291,20 @@ def loadFile(fileName):
         byte=f.read(2)
         x+=2
     f.close()
+    
+    #load the program state (cursor location, register values, stack)
+    with open(fileLoc+"info.txt") as f:
+        lines = f.readlines()
+        cursor=int(lines[0])
+        splitReg= lines[1].split(',')
+        regCount= 0
+        for regNum in splitReg:
+            register[regCount]= int(regNum)
+            regCount+=1
+        if(len(lines[2])>1):
+             splitStk= lines[2].split(',')
+             for regStk in splitStk:
+                prgStack.append(int(regStk))
 
 
 def mainEvent():
@@ -300,13 +317,11 @@ def mainEvent():
 
 
 try:
-    loadFile('challenge')
+    loadFiles('challenge')
 except:
     printToScreen(("Unexpected error:", sys.exc_info()[0]))
     printToScreen(("Unexpected error:", sys.exc_info()[1]))
 
 finally:
-    cursor=0
     initGUI()
-
-    
+  
