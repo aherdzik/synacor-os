@@ -199,7 +199,7 @@ def wait():
     global handlingInput,loadStateFlag, saveStateFlag,cursor
     while False ==handlingInput and False==loadStateFlag and False==saveStateFlag:
         master.update()
-    if True==saveStateFlag:
+    if True==saveStateFlag: #we have to move the cursor back a command if you save state while the program is waiting for text input, so that when the state is loaded it will start on waiting for input text
         cursor = cursor-2
 
 def inputReceived():
