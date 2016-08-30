@@ -21,10 +21,13 @@ master = []
 maxSize = []
 registerInputs = []
 e1=[]
+stateName=[]
 UIUpdate= []
+loadStateFlag= False
+saveStateFlag= False
 
 def handleCommand(currentCommand):
-    global cursor, inputText
+    global cursor, inputText,saveStateFlag, loadStateFlag
     cursor= cursor+1
     if currentCommand == 0: # stop program
         printToScreen("program halted at command " ,cursor-1)
@@ -168,24 +171,15 @@ def handleCommand(currentCommand):
             #handlingInput=True
         if len(curInput) == 1:
             handlingInput=False
-        register[targetReg]=ord(curInput[0])
-        curInput = curInput[1:]
+        if not saveStateFlag and not loadStateFlag:
+            register[targetReg]=ord(curInput[0])
+            curInput = curInput[1:]
         
     elif currentCommand == 21: #no command
         cursor= cursor-1
     else:
         cursor= cursor-1
-        printToScreen("unhandled command:" ,currentProgram[cursor], " at command " ,cursor)
-
-def saveState():
-    global cursor
-    f = open('output.bin', 'wb')
-    for i  in range(0, len(currentProgram)):
-        f.write(struct.pack("<H", currentProgram[i]))
-    f.close()
-
-def loadState():
-    global cursor
+        printToScreen(("unhandled command:" ,currentProgram[cursor], " at command " ,cursor))
 
 def printInRange(min, max):
     for i in range (min, max):
@@ -202,8 +196,8 @@ def getValue(val):
         return -1
 
 def wait():
-    global handlingInput
-    while False ==handlingInput:
+    global handlingInput,loadStateFlag, saveStateFlag
+    while False ==handlingInput and False==loadStateFlag and False==saveStateFlag:
         master.update()
 
 def inputReceived():
@@ -231,7 +225,7 @@ def printToScreen(line):
     inputText.insert(END, str(line))
 
 def initGUI():
-    global inputText, master, e1, registerInputs,register,UIUpdate
+    global inputText, master, e1, registerInputs,register,UIUpdate,stateName
     master = Tk()
     
     #left frame area
@@ -254,6 +248,17 @@ def initGUI():
     UIUpdate=IntVar()
     checkUIUpdate = Checkbutton(rightFrame, text="Update variables", onvalue = 1, offvalue = 0, variable=UIUpdate)
     checkUIUpdate.pack(side=TOP)
+
+    stateManagerFrame=Frame(rightFrame,bd=1,relief=SUNKEN)
+    stateManagerFrame.pack(side=TOP)
+    Label(stateManagerFrame, text="State Manager").pack(side=TOP)
+
+    stateEntryFrame=Frame(stateManagerFrame)
+    stateEntryFrame.pack(side=TOP)
+    stateName = Entry(stateEntryFrame, width=30)
+    stateName.pack(side=LEFT)
+    Button(stateEntryFrame, text="Load State", command=setLoadStateFlag).pack(side=LEFT)
+    Button(stateEntryFrame, text="Save State", command=setSaveStateFlag).pack(side=LEFT)
     
     #register updating area
     registerFrame= Frame(rightFrame, bd=1,relief=SUNKEN)
@@ -301,20 +306,62 @@ def loadFiles(fileName):
         for regNum in splitReg:
             register[regCount]= int(regNum)
             regCount+=1
+        prgStack=[]
         if(len(lines[2])>1):
              splitStk= lines[2].split(',')
              for regStk in splitStk:
                 prgStack.append(int(regStk))
 
+def setLoadStateFlag():
+    global loadStateFlag
+    loadStateFlag=True
+
+def setSaveStateFlag():
+    global saveStateFlag
+    saveStateFlag=True
+
+def saveState():
+    global cursor, stateName,register,prgStack
+    fileName= stateName.get()
+    fileLoc=("saves/" + fileName+ "/")
+    if not os.path.isdir(fileLoc):
+        os.mkdir(fileLoc)
+    
+    f = open(fileLoc+ fileName + ".bin", 'wb')
+    for i  in range(0, len(currentProgram)):
+        f.write(struct.pack("<H", currentProgram[i]))
+    f.close()
+
+    f = open(fileLoc+ "info.txt", 'w')
+    f.write(str(cursor)+ '\n')
+    regCursor=0
+    for reg in register:
+        f.write(str(reg))
+        if not 7==regCursor:
+            f.write(',')
+        regCursor=regCursor+1
+    f.write('\n')
+    stkCursor=0
+    for stk in prgStack:
+        f.write(str(stk))
+        if not len(prgStack)-1==stkCursor:
+            f.write(',')
+        stkCursor= stkCursor +1
+    f.write('\n')
 
 def mainEvent():
-    global cursor,maxSize, currentProgram, root
+    global cursor,maxSize, currentProgram, root, loadStateFlag, saveStateFlag, stateName
     while cursor <= maxSize/2:
         master.update()
         handleCommand(currentProgram[cursor])
         cursor= cursor +1
         updateUI()
-
+        if True==loadStateFlag:
+            loadFiles(stateName.get())
+            loadStateFlag= False
+        if True==saveStateFlag:
+            saveState()
+            saveStateFlag= False
 
 try:
     loadFiles('challenge')

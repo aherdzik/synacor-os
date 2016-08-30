@@ -26,7 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="arch-spec" />
-    <Content Include="challenge.bin" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
