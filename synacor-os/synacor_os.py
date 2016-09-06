@@ -24,6 +24,7 @@ registerInputs = []
 e1=[]
 stateName=[]
 stackText=[]
+cursorText=[]
 UIUpdate= []
 loadStateFlag= False
 saveStateFlag= False
@@ -32,7 +33,7 @@ def handleCommand(currentCommand):
     global cursor, inputText,saveStateFlag, loadStateFlag
     cursor= cursor+1
     if currentCommand == 0: # stop program
-        printToScreen("program halted at command " ,cursor-1)
+        printToScreen("program halted at command " + str(cursor-1))
         input()
         sys.exit()
     elif currentCommand == 1: # set a to value of b
@@ -218,6 +219,10 @@ def setRegisters():
     for i in range(0,8):
         register[i]=int(registerInputs[i].get())
 
+def setCursor():
+    global cursorText,cursor
+    cursor= int(cursorText.get())
+
 def setStack():
     global prgStack,stackText
     prgStack= []
@@ -226,12 +231,13 @@ def setStack():
         prgStack.append(int(s))
 
 def updateUI():
-    global curInput,register,registerInputs,UIUpdate, prgStack,stackText
+    global curInput,register,registerInputs,UIUpdate, prgStack,stackText, cursorText, cursor
     if 1== UIUpdate.get():
         for i in range(0,8):
             registerInputs[i].delete(0,END)
             registerInputs[i].insert(0,str(register[i]))
         stackText.delete(0,END)
+
         curStack=0
         while curStack<len(prgStack):
             stackText.insert(len(stackText.get()),str(prgStack[curStack]))
@@ -239,11 +245,15 @@ def updateUI():
                 stackText.insert(len(stackText.get()),",")
             curStack= curStack+1
 
+        cursorText.delete(0,END)
+        cursorText.insert(0,str(cursor))
+
+
 def printToScreen(line):
     inputText.insert(END, str(line))
 
 def initGUI():
-    global inputText, master, e1, registerInputs,register,UIUpdate,stateName,stackText
+    global inputText, master, e1, registerInputs,register,UIUpdate,stateName,stackText, cursorText
     master = Tk()
     
     #left frame area
@@ -302,6 +312,17 @@ def initGUI():
     stackText = Entry(stackEntryFrame, width=30)
     stackText.pack(side=LEFT)
     Button(stackEntryFrame, text="Set Stack", command=setStack).pack(side=LEFT)
+
+    #cursor manager area
+    cursorManagerFrame=Frame(rightFrame,bd=1,relief=SUNKEN)
+    cursorManagerFrame.pack(side=TOP)
+    Label(cursorManagerFrame, text="Cursor").pack(side=TOP)
+
+    cursorEntryFrame=Frame(cursorManagerFrame)
+    cursorEntryFrame.pack(side=TOP)
+    cursorText = Entry(cursorEntryFrame, width=10)
+    cursorText.pack(side=LEFT)
+    Button(cursorEntryFrame, text="Set Cursor", command=setCursor).pack(side=LEFT)
 
 
     master.after(10, mainEvent)
