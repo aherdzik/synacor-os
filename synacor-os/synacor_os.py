@@ -14,6 +14,7 @@ currentProgram = []
 register = [-1,-1,-1,-1,-1,-1,-1,-1]
 prgStack = []
 stringVal= ["halt", "set", "push", "pop", "eq", "gt", "jmp", "jt", "jf", "add", "mult", "mod", "and", "or", "not", "rmem", "wmem", "call", "ret", "out", "in", "noop"]
+cmdLengths=[1,3,2,2,4,4,2,3,3,4,4,4,4,4,3,3,3,2,2,2,2,1]
 curInput = []
 handlingInput= False
 inputText = []
@@ -22,6 +23,7 @@ maxSize = []
 registerInputs = []
 e1=[]
 stateName=[]
+stackText=[]
 UIUpdate= []
 loadStateFlag= False
 saveStateFlag= False
@@ -216,18 +218,32 @@ def setRegisters():
     for i in range(0,8):
         register[i]=int(registerInputs[i].get())
 
+def setStack():
+    global prgStack,stackText
+    prgStack= []
+    stackList= stackText.get().split(',')
+    for s in stackList:
+        prgStack.append(int(s))
+
 def updateUI():
-    global curInput,register,registerInputs,UIUpdate
+    global curInput,register,registerInputs,UIUpdate, prgStack,stackText
     if 1== UIUpdate.get():
         for i in range(0,8):
             registerInputs[i].delete(0,END)
             registerInputs[i].insert(0,str(register[i]))
+        stackText.delete(0,END)
+        curStack=0
+        while curStack<len(prgStack):
+            stackText.insert(len(stackText.get()),str(prgStack[curStack]))
+            if not curStack == len(prgStack)-1:
+                stackText.insert(len(stackText.get()),",")
+            curStack= curStack+1
 
 def printToScreen(line):
     inputText.insert(END, str(line))
 
 def initGUI():
-    global inputText, master, e1, registerInputs,register,UIUpdate,stateName
+    global inputText, master, e1, registerInputs,register,UIUpdate,stateName,stackText
     master = Tk()
     
     #left frame area
@@ -250,7 +266,10 @@ def initGUI():
     UIUpdate=IntVar()
     checkUIUpdate = Checkbutton(rightFrame, text="Update variables", onvalue = 1, offvalue = 0, variable=UIUpdate)
     checkUIUpdate.pack(side=TOP)
+    Button(rightFrame, text="Print Program", command=printProgram).pack(side=TOP)
 
+
+    #state manager area
     stateManagerFrame=Frame(rightFrame,bd=1,relief=SUNKEN)
     stateManagerFrame.pack(side=TOP)
     Label(stateManagerFrame, text="State Manager").pack(side=TOP)
@@ -272,6 +291,17 @@ def initGUI():
         registerInputs[i].grid(row=int(i/2),column=int(i%2))
     registerInputFrame.pack(side=TOP)
     Button(registerFrame, text="Set Registers", command=setRegisters).pack(side=TOP)
+
+    #stack manager area
+    stackManagerFrame=Frame(rightFrame,bd=1,relief=SUNKEN)
+    stackManagerFrame.pack(side=TOP)
+    Label(stackManagerFrame, text="Stack Manager").pack(side=TOP)
+
+    stackEntryFrame=Frame(stackManagerFrame)
+    stackEntryFrame.pack(side=TOP)
+    stackText = Entry(stackEntryFrame, width=30)
+    stackText.pack(side=LEFT)
+    Button(stackEntryFrame, text="Set Stack", command=setStack).pack(side=LEFT)
 
 
     master.after(10, mainEvent)
@@ -350,6 +380,46 @@ def saveState():
             f.write(',')
         stkCursor= stkCursor +1
     f.write('\n')
+
+def printProgram():
+    global stringVal,cmdLengths,currentProgram
+    f = open("currentdebug.txt", 'w')
+    curCursor=0
+    while curCursor < len(currentProgram):
+        f.write("cmd" +str(curCursor) + " ")
+        if currentProgram[curCursor]>=len(stringVal):
+            returnVal=""
+            if currentProgram[curCursor]>=32768:
+                returnVal=("reg"+ str(currentProgram[curCursor]-32768))
+            else:
+                returnVal=str(currentProgram[curCursor])
+            f.write("UNKNOWN COMMAND " + returnVal)
+        else:
+            f.write(stringVal[currentProgram[curCursor]] + "(")
+            f.write(str(currentProgram[curCursor]) + ") " )
+            if currentProgram[curCursor]==19:
+                while currentProgram[curCursor]==19:
+                    if currentProgram[curCursor+1] <=255:
+                        f.write(chr(currentProgram[curCursor+1]))
+                    else:
+                        f.write("REG"+ str(currentProgram[curCursor+1]-32768))
+                    curCursor= curCursor+2
+                curCursor= curCursor-1
+            else:
+                varNum=2
+                totalVars=cmdLengths[currentProgram[curCursor]]
+                while varNum<=totalVars:
+                    curCursor= curCursor+1
+                    if currentProgram[curCursor]>=32768:
+                        f.write("reg" + str(currentProgram[curCursor]-32768)+ " ")
+                    else:
+                        f.write(str(currentProgram[curCursor])+ " ")
+                    varNum= varNum+1   
+        f.write('\n')
+        curCursor=curCursor+1
+        f.flush()
+
+
 
 def mainEvent():
     global cursor,maxSize, currentProgram, root, loadStateFlag, saveStateFlag, stateName
