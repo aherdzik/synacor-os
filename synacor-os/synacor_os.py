@@ -25,7 +25,11 @@ e1=[]
 stateName=[]
 stackText=[]
 cursorText=[]
+stepUIUpdate= []
 UIUpdate= []
+stepUpdateChecked =[]
+waitingForStep=False
+stepCheckBox= []
 loadStateFlag= False
 saveStateFlag= False
 
@@ -205,6 +209,17 @@ def wait():
     if True==saveStateFlag: #we have to move the cursor back a command if you save state while the program is waiting for text input, so that when the state is loaded it will start on waiting for input text
         cursor = cursor-2
 
+def waitForStep():
+    global stepUpdateChecked, waitingForStep
+    if 1 == stepUpdateChecked.get():
+        waitingForStep=True
+        while waitingForStep ==True:
+            master.update()
+
+def stepPressed():
+    global waitingForStep
+    waitingForStep=False
+    
 def inputReceived():
     global handlingInput, curInput, e1
     if False == handlingInput:
@@ -218,6 +233,8 @@ def setRegisters():
     global register,registerInputs
     for i in range(0,8):
         register[i]=int(registerInputs[i].get())
+
+
 
 def setCursor():
     global cursorText,cursor
@@ -253,7 +270,7 @@ def printToScreen(line):
     inputText.insert(END, str(line))
 
 def initGUI():
-    global inputText, master, e1, registerInputs,register,UIUpdate,stateName,stackText, cursorText
+    global inputText, master, e1, registerInputs,register,UIUpdate,stateName,stackText, cursorText, stepCheckBox, stepUpdateChecked 
     master = Tk()
     
     #left frame area
@@ -278,6 +295,13 @@ def initGUI():
     checkUIUpdate.pack(side=TOP)
     Button(rightFrame, text="Print Program", command=printProgram).pack(side=TOP)
 
+    #step manager area
+    stepManagerFrame=Frame(rightFrame,bd=1,relief=SUNKEN)
+    stepManagerFrame.pack(side=TOP)
+    stepUpdateChecked=IntVar()
+    stepCheckBox = Checkbutton(stepManagerFrame, text="Step", onvalue = 1, offvalue = 0, variable=stepUpdateChecked)
+    stepCheckBox.pack(side=LEFT)
+    Button(stepManagerFrame, text="Step", command=stepPressed).pack(side=LEFT)
 
     #state manager area
     stateManagerFrame=Frame(rightFrame,bd=1,relief=SUNKEN)
@@ -449,6 +473,7 @@ def mainEvent():
         handleCommand(currentProgram[cursor])
         cursor= cursor +1
         updateUI()
+        waitForStep()
         if True==loadStateFlag:
             loadFiles(stateName.get())
             loadStateFlag= False
