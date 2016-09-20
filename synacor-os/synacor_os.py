@@ -275,7 +275,20 @@ def initGUI():
     
     #left frame area
     leftFrame= Frame(master,width=2,bd=1, relief=SUNKEN)
-    leftFrame.pack(side=LEFT)
+    leftFrame.pack(side=LEFT, fill=BOTH, expand=1)
+
+    #stack manager area
+    stackManagerFrame=Frame(leftFrame,bd=1,relief=SUNKEN, width=100)
+    stackManagerFrame.pack(side=BOTTOM, fill=BOTH, expand=1)
+    Label(stackManagerFrame, text="Stack Manager").pack(side=TOP, fill=BOTH, expand=1)
+
+    stackEntryFrame=Frame(stackManagerFrame, width=100)
+    stackEntryFrame.pack(side=TOP, fill=BOTH, expand=1)
+    stackText = Entry(stackEntryFrame, width=100)
+    stackText.pack(side=LEFT, fill=BOTH, expand=1)
+    Button(stackEntryFrame, text="Set Stack", command=setStack).pack(side=LEFT)
+
+
     inputText= Text(leftFrame)
     inputText.bind("<Key>", lambda e: "break")
     inputText.pack(side=TOP)
@@ -287,6 +300,7 @@ def initGUI():
     b = Button(inputFrame, text="OK", command=inputReceived).pack(side=LEFT)
     inputFrame.pack(side=BOTTOM)
 
+    
     #right frame area
     rightFrame= Frame(master,width=2, bd=1,relief=SUNKEN)
     rightFrame.pack(side=RIGHT)
@@ -325,17 +339,6 @@ def initGUI():
         registerInputs[i].grid(row=int(i/2),column=int(i%2))
     registerInputFrame.pack(side=TOP)
     Button(registerFrame, text="Set Registers", command=setRegisters).pack(side=TOP)
-
-    #stack manager area
-    stackManagerFrame=Frame(rightFrame,bd=1,relief=SUNKEN)
-    stackManagerFrame.pack(side=TOP)
-    Label(stackManagerFrame, text="Stack Manager").pack(side=TOP)
-
-    stackEntryFrame=Frame(stackManagerFrame)
-    stackEntryFrame.pack(side=TOP)
-    stackText = Entry(stackEntryFrame, width=30)
-    stackText.pack(side=LEFT)
-    Button(stackEntryFrame, text="Set Stack", command=setStack).pack(side=LEFT)
 
     #cursor manager area
     cursorManagerFrame=Frame(rightFrame,bd=1,relief=SUNKEN)
