@@ -1,0 +1,32 @@
+int reg0=4, int reg1=1, int reg7=(1, or whatever it needs to be)
+while(???)
+{
+	if(reg0==0)//cmd6027
+	{ 
+		reg0=(reg1+1) %32768 //cmd6030
+		gotopopstack() //cmd6034
+	}
+	else
+	{
+		if(reg1==0)//cmd6035
+		{
+			reg0--; //cmd6038
+			reg1=reg7;//cmd6042
+			push(gotopopstack()(6047))//cmd6045 //note:looks like to usually above a 6056? maybe a jump thing?
+		}
+		else
+		{	push(reg0)//cmd6048
+			reg1--; //cmd6050
+			push(6056)//cmd6054
+		}
+	}
+	
+	6056
+	{
+		reg1=reg0;//cmd6056
+		reg0=pop();//cmd6059
+		reg0--;//cmd6061
+		push(gotopopstack()(6067))//cmd6065
+	}
+}
+

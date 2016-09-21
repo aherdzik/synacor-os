@@ -282,21 +282,21 @@ cmd1509 pop(3) reg5
 cmd1511 pop(3) reg4 
 cmd1513 pop(3) reg3 
 cmd1515 pop(3) reg0 
-cmd1517 ret(18) 2 
-cmd1519 UNKNOWN COMMAND reg1
+cmd1517 ret(18) 
+cmd1518 push(2) reg1 
 cmd1520 set(1) reg1 1528 
 cmd1523 call(17) 1458 
 cmd1525 pop(3) reg1 
-cmd1527 ret(18) 19 
-cmd1529 UNKNOWN COMMAND reg0
-cmd1530 ret(18) 2 
-cmd1532 UNKNOWN COMMAND reg1
+cmd1527 ret(18) 
+cmd1528 out(19) REG0
+cmd1530 ret(18) 
+cmd1531 push(2) reg1 
 cmd1533 set(1) reg1 reg2 
 cmd1536 call(17) 2125 
 cmd1538 out(19) REG0
 cmd1540 pop(3) reg1 
-cmd1542 ret(18) 2 
-cmd1544 UNKNOWN COMMAND reg1
+cmd1542 ret(18) 
+cmd1543 push(2) reg1 
 cmd1545 push(2) reg3 
 cmd1547 rmem(15) reg3 reg0 
 cmd1550 jf(8) reg3 1563 
@@ -307,31 +307,29 @@ cmd1561 jmp(6) 1566
 cmd1563 set(1) reg0 32767 
 cmd1566 pop(3) reg3 
 cmd1568 pop(3) reg1 
-cmd1570 ret(18) 2 
-cmd1572 UNKNOWN COMMAND reg1
+cmd1570 ret(18) 
+cmd1571 push(2) reg1 
 cmd1573 push(2) reg2 
 cmd1575 set(1) reg2 reg1 
 cmd1578 set(1) reg1 1605 
 cmd1581 call(17) 1543 
 cmd1583 pop(3) reg2 
 cmd1585 pop(3) reg1 
-cmd1587 ret(18) 2 
-cmd1589 UNKNOWN COMMAND reg1
+cmd1587 ret(18) 
+cmd1588 push(2) reg1 
 cmd1590 push(2) reg2 
 cmd1592 set(1) reg2 reg1 
 cmd1595 set(1) reg1 1648 
 cmd1598 call(17) 1543 
 cmd1600 pop(3) reg2 
 cmd1602 pop(3) reg1 
-cmd1604 ret(18) 4 
-cmd1606 UNKNOWN COMMAND reg0
-cmd1607 UNKNOWN COMMAND reg0
-cmd1608 UNKNOWN COMMAND reg2
+cmd1604 ret(18) 
+cmd1605 eq(4) reg0 reg0 reg2 
 cmd1609 jf(8) reg0 1618 
 cmd1612 set(1) reg2 reg1 
 cmd1615 set(1) reg1 32767 
-cmd1618 ret(18) 2 
-cmd1620 UNKNOWN COMMAND reg3
+cmd1618 ret(18) 
+cmd1619 push(2) reg3 
 cmd1621 add(9) reg3 reg2 1 
 cmd1625 add(9) reg3 reg3 reg1 
 cmd1629 rmem(15) reg3 reg3 
@@ -340,16 +338,16 @@ cmd1636 jt(7) reg3 1645
 cmd1639 set(1) reg2 reg1 
 cmd1642 set(1) reg1 32767 
 cmd1645 pop(3) reg3 
-cmd1647 ret(18) 2 
-cmd1649 UNKNOWN COMMAND reg1
+cmd1647 ret(18) 
+cmd1648 push(2) reg1 
 cmd1650 set(1) reg1 reg2 
 cmd1653 call(17) 1667 
 cmd1655 pop(3) reg1 
 cmd1657 jf(8) reg0 1666 
 cmd1660 set(1) reg2 reg1 
 cmd1663 set(1) reg1 32767 
-cmd1666 ret(18) 2 
-cmd1668 UNKNOWN COMMAND reg1
+cmd1666 ret(18) 
+cmd1667 push(2) reg1 
 cmd1669 push(2) reg2 
 cmd1671 push(2) reg3 
 cmd1673 push(2) reg4 
@@ -370,8 +368,8 @@ cmd1714 pop(3) reg4
 cmd1716 pop(3) reg3 
 cmd1718 pop(3) reg2 
 cmd1720 pop(3) reg1 
-cmd1722 ret(18) 2 
-cmd1724 UNKNOWN COMMAND reg0
+cmd1722 ret(18) 
+cmd1723 push(2) reg0 
 cmd1725 push(2) reg1 
 cmd1727 set(1) reg1 6068 
 cmd1730 rmem(15) reg0 reg1 
@@ -387,8 +385,8 @@ cmd1755 eq(4) reg0 30050 reg1
 cmd1759 jf(8) reg0 1730 
 cmd1762 pop(3) reg1 
 cmd1764 pop(3) reg0 
-cmd1766 ret(18) 2 
-cmd1768 UNKNOWN COMMAND reg0
+cmd1766 ret(18) 
+cmd1767 push(2) reg0 
 cmd1769 push(2) reg2 
 cmd1771 push(2) reg3 
 cmd1773 push(2) reg4 
@@ -415,8 +413,8 @@ cmd1832 pop(3) reg4
 cmd1834 pop(3) reg3 
 cmd1836 pop(3) reg2 
 cmd1838 pop(3) reg0 
-cmd1840 ret(18) 2 
-cmd1842 UNKNOWN COMMAND reg3
+cmd1840 ret(18) 
+cmd1841 push(2) reg3 
 cmd1843 push(2) reg4 
 cmd1845 push(2) reg5 
 cmd1847 push(2) reg6 
@@ -469,8 +467,8 @@ cmd1992 pop(3) reg6
 cmd1994 pop(3) reg5 
 cmd1996 pop(3) reg4 
 cmd1998 pop(3) reg3 
-cmd2000 ret(18) 2 
-cmd2002 UNKNOWN COMMAND reg0
+cmd2000 ret(18) 
+cmd2001 push(2) reg0 
 cmd2003 push(2) reg1 
 cmd2005 push(2) reg2 
 cmd2007 push(2) reg3 
@@ -513,8 +511,8 @@ cmd2116 pop(3) reg3
 cmd2118 pop(3) reg2 
 cmd2120 pop(3) reg1 
 cmd2122 pop(3) reg0 
-cmd2124 ret(18) 2 
-cmd2126 UNKNOWN COMMAND reg1
+cmd2124 ret(18) 
+cmd2125 push(2) reg1 
 cmd2127 push(2) reg2 
 cmd2129 and(12) reg2 reg0 reg1 
 cmd2133 not(14) reg2 reg2 
@@ -522,21 +520,18 @@ cmd2136 or(13) reg0 reg0 reg1
 cmd2140 and(12) reg0 reg0 reg2 
 cmd2144 pop(3) reg2 
 cmd2146 pop(3) reg1 
-cmd2148 ret(18) 9 
-cmd2150 UNKNOWN COMMAND reg0
-cmd2151 UNKNOWN COMMAND reg0
-cmd2152 UNKNOWN COMMAND reg1
+cmd2148 ret(18) 
+cmd2149 add(9) reg0 reg0 reg1 
 cmd2153 gt(5) reg1 reg1 reg0 
-cmd2157 ret(18) 2 
-cmd2159 UNKNOWN COMMAND reg2
+cmd2157 ret(18) 
+cmd2158 push(2) reg2 
 cmd2160 gt(5) reg2 reg1 reg0 
 cmd2164 mult(10) reg1 reg1 32767 
 cmd2168 add(9) reg0 reg0 reg1 
 cmd2172 set(1) reg1 reg2 
 cmd2175 pop(3) reg2 
-cmd2177 ret(18) 8 
-cmd2179 UNKNOWN COMMAND reg0
-cmd2180 UNKNOWN COMMAND 2241
+cmd2177 ret(18) 
+cmd2178 jf(8) reg0 2241 
 cmd2181 jf(8) reg1 2241 
 cmd2184 push(2) reg2 
 cmd2186 push(2) reg3 
@@ -557,12 +552,11 @@ cmd2231 jmp(6) 2236
 cmd2233 set(1) reg1 1 
 cmd2236 pop(3) reg3 
 cmd2238 pop(3) reg2 
-cmd2240 ret(18) 1 
-cmd2242 UNKNOWN COMMAND reg0
-cmd2243 halt(0) 
+cmd2240 ret(18) 
+cmd2241 set(1) reg0 0 
 cmd2244 set(1) reg1 0 
-cmd2247 ret(18) 2 
-cmd2249 UNKNOWN COMMAND reg1
+cmd2247 ret(18) 
+cmd2248 push(2) reg1 
 cmd2250 push(2) reg2 
 cmd2252 jf(8) reg1 2276 
 cmd2255 add(9) reg1 reg1 32767 
@@ -573,8 +567,8 @@ cmd2270 or(13) reg0 reg0 1
 cmd2274 jmp(6) 2252 
 cmd2276 pop(3) reg2 
 cmd2278 pop(3) reg1 
-cmd2280 ret(18) 2 
-cmd2282 UNKNOWN COMMAND reg1
+cmd2280 ret(18) 
+cmd2281 push(2) reg1 
 cmd2283 gt(5) reg1 reg0 14 
 cmd2287 jt(7) reg1 2309 
 cmd2290 set(1) reg1 reg0 
@@ -585,8 +579,8 @@ cmd2303 mult(10) reg0 reg0 2
 cmd2307 jmp(6) 2296 
 cmd2309 set(1) reg0 32767 
 cmd2312 pop(3) reg1 
-cmd2314 ret(18) 6 
-cmd2316 UNKNOWN COMMAND 2734
+cmd2314 ret(18) 
+cmd2315 jmp(6) 2734 
 cmd2317 UNKNOWN COMMAND 6142
 cmd2318 UNKNOWN COMMAND 6152
 cmd2319 UNKNOWN COMMAND 26900
@@ -1082,8 +1076,8 @@ cmd2955 pop(3) reg3
 cmd2957 pop(3) reg2 
 cmd2959 pop(3) reg1 
 cmd2961 pop(3) reg0 
-cmd2963 ret(18) 2 
-cmd2965 UNKNOWN COMMAND reg0
+cmd2963 ret(18) 
+cmd2964 push(2) reg0 
 cmd2966 push(2) reg1 
 cmd2968 push(2) reg2 
 cmd2970 rmem(15) reg1 reg0 
@@ -1182,8 +1176,8 @@ cmd3236 pop(3) reg0
 cmd3238 pop(3) reg2 
 cmd3240 pop(3) reg1 
 cmd3242 pop(3) reg0 
-cmd3244 ret(18) 2 
-cmd3246 UNKNOWN COMMAND reg0
+cmd3244 ret(18) 
+cmd3245 push(2) reg0 
 cmd3247 push(2) reg1 
 cmd3249 push(2) reg2 
 cmd3251 set(1) reg1 reg0 
@@ -1215,8 +1209,8 @@ cmd3324 pop(3) reg0
 cmd3326 pop(3) reg2 
 cmd3328 pop(3) reg1 
 cmd3330 pop(3) reg0 
-cmd3332 ret(18) 2 
-cmd3334 UNKNOWN COMMAND reg0
+cmd3332 ret(18) 
+cmd3333 push(2) reg0 
 cmd3335 push(2) reg0 
 cmd3337 push(2) reg1 
 cmd3339 push(2) reg2 
@@ -1228,8 +1222,8 @@ cmd3353 pop(3) reg2
 cmd3355 pop(3) reg1 
 cmd3357 pop(3) reg0 
 cmd3359 pop(3) reg0 
-cmd3361 ret(18) 2 
-cmd3363 UNKNOWN COMMAND reg0
+cmd3361 ret(18) 
+cmd3362 push(2) reg0 
 cmd3364 push(2) reg2 
 cmd3366 push(2) reg0 
 cmd3368 push(2) reg1 
@@ -1245,8 +1239,8 @@ cmd3390 set(1) reg2 0
 cmd3393 call(17) 5876 
 cmd3395 pop(3) reg2 
 cmd3397 pop(3) reg0 
-cmd3399 ret(18) 2 
-cmd3401 UNKNOWN COMMAND reg0
+cmd3399 ret(18) 
+cmd3400 push(2) reg0 
 cmd3402 push(2) reg1 
 cmd3404 push(2) reg2 
 cmd3406 call(17) 5921 
@@ -1281,8 +1275,8 @@ cmd3479 pop(3) reg0
 cmd3481 pop(3) reg2 
 cmd3483 pop(3) reg1 
 cmd3485 pop(3) reg0 
-cmd3487 ret(18) 2 
-cmd3489 UNKNOWN COMMAND reg0
+cmd3487 ret(18) 
+cmd3488 push(2) reg0 
 cmd3490 push(2) reg1 
 cmd3492 call(17) 5921 
 cmd3494 jf(8) reg0 3539 
@@ -1314,8 +1308,8 @@ cmd3559 pop(3) reg1
 cmd3561 pop(3) reg0 
 cmd3563 pop(3) reg1 
 cmd3565 pop(3) reg0 
-cmd3567 ret(18) 2 
-cmd3569 UNKNOWN COMMAND reg0
+cmd3567 ret(18) 
+cmd3568 push(2) reg0 
 cmd3570 push(2) reg1 
 cmd3572 call(17) 5921 
 cmd3574 jf(8) reg0 3601 
@@ -1350,8 +1344,8 @@ cmd3647 pop(3) reg1
 cmd3649 pop(3) reg0 
 cmd3651 pop(3) reg1 
 cmd3653 pop(3) reg0 
-cmd3655 ret(18) 2 
-cmd3657 UNKNOWN COMMAND reg0
+cmd3655 ret(18) 
+cmd3656 push(2) reg0 
 cmd3658 push(2) reg1 
 cmd3660 push(2) reg2 
 cmd3662 set(1) reg0 2680 
@@ -1367,8 +1361,8 @@ cmd3691 wmem(16) 2732 2648
 cmd3694 pop(3) reg2 
 cmd3696 pop(3) reg1 
 cmd3698 pop(3) reg0 
-cmd3700 ret(18) 2 
-cmd3702 UNKNOWN COMMAND reg0
+cmd3700 ret(18) 
+cmd3701 push(2) reg0 
 cmd3703 push(2) reg1 
 cmd3705 push(2) reg2 
 cmd3707 set(1) reg0 28204 
@@ -1385,41 +1379,40 @@ cmd3729 rmem(15) reg1 3726
 cmd3732 or(13) reg1 reg1 reg0 
 cmd3736 wmem(16) 3726 reg1 
 cmd3739 pop(3) reg1 
-cmd3741 ret(18) 16 
-cmd3743 UNKNOWN COMMAND 3726
-cmd3744 halt(0) 
-cmd3745 ret(18) 2 
-cmd3747 UNKNOWN COMMAND reg0
+cmd3741 ret(18) 
+cmd3742 wmem(16) 3726 0 
+cmd3745 ret(18) 
+cmd3746 push(2) reg0 
 cmd3748 set(1) reg0 1 
 cmd3751 call(17) 3727 
 cmd3753 pop(3) reg0 
-cmd3755 ret(18) 2 
-cmd3757 UNKNOWN COMMAND reg0
+cmd3755 ret(18) 
+cmd3756 push(2) reg0 
 cmd3758 set(1) reg0 2 
 cmd3761 call(17) 3727 
 cmd3763 pop(3) reg0 
-cmd3765 ret(18) 2 
-cmd3767 UNKNOWN COMMAND reg0
+cmd3765 ret(18) 
+cmd3766 push(2) reg0 
 cmd3768 set(1) reg0 4 
 cmd3771 call(17) 3727 
 cmd3773 pop(3) reg0 
-cmd3775 ret(18) 2 
-cmd3777 UNKNOWN COMMAND reg0
+cmd3775 ret(18) 
+cmd3776 push(2) reg0 
 cmd3778 set(1) reg0 8 
 cmd3781 call(17) 3727 
 cmd3783 pop(3) reg0 
-cmd3785 ret(18) 2 
-cmd3787 UNKNOWN COMMAND reg0
+cmd3785 ret(18) 
+cmd3786 push(2) reg0 
 cmd3788 set(1) reg0 16 
 cmd3791 call(17) 3727 
 cmd3793 pop(3) reg0 
-cmd3795 ret(18) 2 
-cmd3797 UNKNOWN COMMAND reg0
+cmd3795 ret(18) 
+cmd3796 push(2) reg0 
 cmd3798 set(1) reg0 32 
 cmd3801 call(17) 3727 
 cmd3803 pop(3) reg0 
-cmd3805 ret(18) 2 
-cmd3807 UNKNOWN COMMAND reg0
+cmd3805 ret(18) 
+cmd3806 push(2) reg0 
 cmd3808 push(2) reg1 
 cmd3810 push(2) reg2 
 cmd3812 push(2) reg3 
@@ -1455,8 +1448,8 @@ cmd3884 pop(3) reg3
 cmd3886 pop(3) reg2 
 cmd3888 pop(3) reg1 
 cmd3890 pop(3) reg0 
-cmd3892 ret(18) 2 
-cmd3894 UNKNOWN COMMAND reg0
+cmd3892 ret(18) 
+cmd3893 push(2) reg0 
 cmd3895 push(2) reg1 
 cmd3897 rmem(15) reg0 2462 
 cmd3900 rmem(15) reg1 27101 
@@ -1476,7 +1469,8 @@ cmd3934 wmem(16) 2732 2457
 cmd3937 wmem(16) 2733 2457 
 cmd3940 pop(3) reg1 
 cmd3942 pop(3) reg0 
-cmd3944 ret(18) 26007 
+cmd3944 ret(18) 
+cmd3945 UNKNOWN COMMAND 26007
 cmd3946 UNKNOWN COMMAND 26013
 cmd3947 UNKNOWN COMMAND 26017
 cmd3948 UNKNOWN COMMAND 2149
@@ -1496,24 +1490,24 @@ cmd3965 set(1) reg1 0
 cmd3968 call(17) 4218 
 cmd3970 pop(3) reg1 
 cmd3972 pop(3) reg0 
-cmd3974 ret(18) 2 
-cmd3976 UNKNOWN COMMAND reg0
+cmd3974 ret(18) 
+cmd3975 push(2) reg0 
 cmd3977 push(2) reg1 
 cmd3979 set(1) reg0 8 
 cmd3982 set(1) reg1 1 
 cmd3985 call(17) 4279 
 cmd3987 pop(3) reg1 
 cmd3989 pop(3) reg0 
-cmd3991 ret(18) 2 
-cmd3993 UNKNOWN COMMAND reg0
+cmd3991 ret(18) 
+cmd3992 push(2) reg0 
 cmd3994 push(2) reg1 
 cmd3996 set(1) reg0 1 
 cmd3999 set(1) reg1 2 
 cmd4002 call(17) 4218 
 cmd4004 pop(3) reg1 
 cmd4006 pop(3) reg0 
-cmd4008 ret(18) 2 
-cmd4010 UNKNOWN COMMAND reg0
+cmd4008 ret(18) 
+cmd4009 push(2) reg0 
 cmd4011 push(2) reg1 
 cmd4013 set(1) reg0 1 
 cmd4016 set(1) reg1 3 
@@ -1521,98 +1515,98 @@ cmd4019 call(17) 4279
 cmd4021 call(17) 4533 
 cmd4023 pop(3) reg1 
 cmd4025 pop(3) reg0 
-cmd4027 ret(18) 2 
-cmd4029 UNKNOWN COMMAND reg0
+cmd4027 ret(18) 
+cmd4028 push(2) reg0 
 cmd4030 push(2) reg1 
 cmd4032 set(1) reg0 4 
 cmd4035 set(1) reg1 4 
 cmd4038 call(17) 4279 
 cmd4040 pop(3) reg1 
 cmd4042 pop(3) reg0 
-cmd4044 ret(18) 2 
-cmd4046 UNKNOWN COMMAND reg0
+cmd4044 ret(18) 
+cmd4045 push(2) reg0 
 cmd4047 push(2) reg1 
 cmd4049 set(1) reg0 2 
 cmd4052 set(1) reg1 5 
 cmd4055 call(17) 4218 
 cmd4057 pop(3) reg1 
 cmd4059 pop(3) reg0 
-cmd4061 ret(18) 2 
-cmd4063 UNKNOWN COMMAND reg0
+cmd4061 ret(18) 
+cmd4062 push(2) reg0 
 cmd4064 push(2) reg1 
 cmd4066 set(1) reg0 11 
 cmd4069 set(1) reg1 6 
 cmd4072 call(17) 4279 
 cmd4074 pop(3) reg1 
 cmd4076 pop(3) reg0 
-cmd4078 ret(18) 2 
-cmd4080 UNKNOWN COMMAND reg0
+cmd4078 ret(18) 
+cmd4079 push(2) reg0 
 cmd4081 push(2) reg1 
 cmd4083 set(1) reg0 2 
 cmd4086 set(1) reg1 7 
 cmd4089 call(17) 4218 
 cmd4091 pop(3) reg1 
 cmd4093 pop(3) reg0 
-cmd4095 ret(18) 2 
-cmd4097 UNKNOWN COMMAND reg0
+cmd4095 ret(18) 
+cmd4096 push(2) reg0 
 cmd4098 push(2) reg1 
 cmd4100 set(1) reg0 0 
 cmd4103 set(1) reg1 8 
 cmd4106 call(17) 4218 
 cmd4108 pop(3) reg1 
 cmd4110 pop(3) reg0 
-cmd4112 ret(18) 2 
-cmd4114 UNKNOWN COMMAND reg0
+cmd4112 ret(18) 
+cmd4113 push(2) reg0 
 cmd4115 push(2) reg1 
 cmd4117 set(1) reg0 4 
 cmd4120 set(1) reg1 9 
 cmd4123 call(17) 4279 
 cmd4125 pop(3) reg1 
 cmd4127 pop(3) reg0 
-cmd4129 ret(18) 2 
-cmd4131 UNKNOWN COMMAND reg0
+cmd4129 ret(18) 
+cmd4130 push(2) reg0 
 cmd4132 push(2) reg1 
 cmd4134 set(1) reg0 1 
 cmd4137 set(1) reg1 10 
 cmd4140 call(17) 4218 
 cmd4142 pop(3) reg1 
 cmd4144 pop(3) reg0 
-cmd4146 ret(18) 2 
-cmd4148 UNKNOWN COMMAND reg0
+cmd4146 ret(18) 
+cmd4147 push(2) reg0 
 cmd4149 push(2) reg1 
 cmd4151 set(1) reg0 18 
 cmd4154 set(1) reg1 11 
 cmd4157 call(17) 4279 
 cmd4159 pop(3) reg1 
 cmd4161 pop(3) reg0 
-cmd4163 ret(18) 17 
-cmd4165 UNKNOWN COMMAND 4611
-cmd4166 ret(18) 2 
-cmd4168 UNKNOWN COMMAND reg0
+cmd4163 ret(18) 
+cmd4164 call(17) 4611 
+cmd4166 ret(18) 
+cmd4167 push(2) reg0 
 cmd4169 push(2) reg1 
 cmd4171 set(1) reg0 1 
 cmd4174 set(1) reg1 12 
 cmd4177 call(17) 4218 
 cmd4179 pop(3) reg1 
 cmd4181 pop(3) reg0 
-cmd4183 ret(18) 2 
-cmd4185 UNKNOWN COMMAND reg0
+cmd4183 ret(18) 
+cmd4184 push(2) reg0 
 cmd4186 push(2) reg1 
 cmd4188 set(1) reg0 9 
 cmd4191 set(1) reg1 13 
 cmd4194 call(17) 4279 
 cmd4196 pop(3) reg1 
 cmd4198 pop(3) reg0 
-cmd4200 ret(18) 2 
-cmd4202 UNKNOWN COMMAND reg0
+cmd4200 ret(18) 
+cmd4201 push(2) reg0 
 cmd4203 push(2) reg1 
 cmd4205 set(1) reg0 2 
 cmd4208 set(1) reg1 14 
 cmd4211 call(17) 4218 
 cmd4213 pop(3) reg1 
 cmd4215 pop(3) reg0 
-cmd4217 ret(18) 2 
-cmd4219 UNKNOWN COMMAND reg0
+cmd4217 ret(18) 
+cmd4218 push(2) reg0 
 cmd4220 push(2) reg1 
 cmd4222 push(2) reg2 
 cmd4224 add(9) reg2 2716 2 
@@ -1636,8 +1630,8 @@ cmd4266 out(19) .
 cmd4272 pop(3) reg2 
 cmd4274 pop(3) reg1 
 cmd4276 pop(3) reg0 
-cmd4278 ret(18) 2 
-cmd4280 UNKNOWN COMMAND reg0
+cmd4278 ret(18) 
+cmd4279 push(2) reg0 
 cmd4281 push(2) reg1 
 cmd4283 push(2) reg2 
 cmd4285 add(9) reg2 2716 2 
@@ -1686,8 +1680,8 @@ cmd4396 call(17) 1518
 cmd4398 pop(3) reg2 
 cmd4400 pop(3) reg1 
 cmd4402 pop(3) reg0 
-cmd4404 ret(18) 2 
-cmd4406 UNKNOWN COMMAND reg0
+cmd4404 ret(18) 
+cmd4405 push(2) reg0 
 cmd4407 push(2) reg1 
 cmd4409 push(2) reg2 
 cmd4411 push(2) reg3 
@@ -1726,16 +1720,16 @@ cmd4506 pop(3) reg3
 cmd4508 pop(3) reg2 
 cmd4510 pop(3) reg1 
 cmd4512 pop(3) reg0 
-cmd4514 ret(18) 2 
-cmd4516 UNKNOWN COMMAND reg0
+cmd4514 ret(18) 
+cmd4515 push(2) reg0 
 cmd4517 rmem(15) reg0 reg0 
 cmd4520 call(17) 2248 
 cmd4522 set(1) reg1 reg2 
 cmd4525 call(17) 2125 
 cmd4527 pop(3) reg1 
 cmd4529 wmem(16) reg1 reg0 
-cmd4532 ret(18) 2 
-cmd4534 UNKNOWN COMMAND reg0
+cmd4532 ret(18) 
+cmd4533 push(2) reg0 
 cmd4535 add(9) reg0 2716 2 
 cmd4539 rmem(15) reg0 reg0 
 cmd4542 jt(7) reg0 4608 
@@ -1763,8 +1757,8 @@ cmd4599 call(17) 1518
 cmd4601 add(9) reg0 2716 2 
 cmd4605 wmem(16) reg0 32767 
 cmd4608 pop(3) reg0 
-cmd4610 ret(18) 2 
-cmd4612 UNKNOWN COMMAND reg0
+cmd4610 ret(18) 
+cmd4611 push(2) reg0 
 cmd4613 add(9) reg0 2716 2 
 cmd4617 rmem(15) reg0 reg0 
 cmd4620 jt(7) reg0 4657 
@@ -1782,8 +1776,8 @@ cmd4650 set(1) reg0 26737
 cmd4653 call(17) 1518 
 cmd4655 call(17) 4660 
 cmd4657 pop(3) reg0 
-cmd4659 ret(18) 2 
-cmd4661 UNKNOWN COMMAND reg0
+cmd4659 ret(18) 
+cmd4660 push(2) reg0 
 cmd4662 wmem(16) 3952 22 
 cmd4665 wmem(16) 3953 0 
 cmd4668 wmem(16) 3954 0 
@@ -1793,8 +1787,8 @@ cmd4677 wmem(16) 3957 0
 cmd4680 add(9) reg0 2716 2 
 cmd4684 wmem(16) reg0 2623 
 cmd4687 pop(3) reg0 
-cmd4689 ret(18) 2 
-cmd4691 UNKNOWN COMMAND reg0
+cmd4689 ret(18) 
+cmd4690 push(2) reg0 
 cmd4692 add(9) reg0 2716 2 
 cmd4696 rmem(15) reg0 reg0 
 cmd4699 eq(4) reg0 reg0 32767 
@@ -1804,8 +1798,8 @@ cmd4709 call(17) 1518
 cmd4711 wmem(16) 2732 2578 
 cmd4714 wmem(16) 2733 2578 
 cmd4717 pop(3) reg0 
-cmd4719 ret(18) 2 
-cmd4721 UNKNOWN COMMAND reg0
+cmd4719 ret(18) 
+cmd4720 push(2) reg0 
 cmd4722 push(2) reg1 
 cmd4724 push(2) reg2 
 cmd4726 push(2) reg3 
@@ -1838,8 +1832,8 @@ cmd4790 pop(3) reg3
 cmd4792 pop(3) reg2 
 cmd4794 pop(3) reg1 
 cmd4796 pop(3) reg0 
-cmd4798 ret(18) 2 
-cmd4800 UNKNOWN COMMAND reg0
+cmd4798 ret(18) 
+cmd4799 push(2) reg0 
 cmd4801 add(9) reg0 2672 2 
 cmd4805 rmem(15) reg0 reg0 
 cmd4808 jt(7) reg0 4858 
@@ -1871,8 +1865,8 @@ cmd4876 pop(3) reg2
 cmd4878 pop(3) reg1 
 cmd4880 pop(3) reg0 
 cmd4882 pop(3) reg0 
-cmd4884 ret(18) 2 
-cmd4886 UNKNOWN COMMAND reg0
+cmd4884 ret(18) 
+cmd4885 push(2) reg0 
 cmd4887 add(9) reg0 2676 2 
 cmd4891 wmem(16) reg0 32767 
 cmd4894 add(9) reg0 2680 2 
@@ -1889,8 +1883,8 @@ cmd4921 pop(3) reg1
 cmd4923 pop(3) reg0 
 cmd4925 wmem(16) 2733 0 
 cmd4928 pop(3) reg0 
-cmd4930 ret(18) 2 
-cmd4932 UNKNOWN COMMAND reg0
+cmd4930 ret(18) 
+cmd4931 push(2) reg0 
 cmd4933 add(9) reg0 2676 2 
 cmd4937 wmem(16) reg0 0 
 cmd4940 add(9) reg0 2680 2 
@@ -1907,8 +1901,8 @@ cmd4967 pop(3) reg1
 cmd4969 pop(3) reg0 
 cmd4971 wmem(16) 2733 0 
 cmd4974 pop(3) reg0 
-cmd4976 ret(18) 2 
-cmd4978 UNKNOWN COMMAND reg2
+cmd4976 ret(18) 
+cmd4977 push(2) reg2 
 cmd4979 push(2) reg3 
 cmd4981 rmem(15) reg2 2732 
 cmd4984 eq(4) reg2 reg2 2457 
@@ -2033,55 +2027,55 @@ cmd5332 pop(3) reg1
 cmd5334 pop(3) reg0 
 cmd5336 pop(3) reg3 
 cmd5338 pop(3) reg2 
-cmd5340 ret(18) 2 
-cmd5342 UNKNOWN COMMAND reg2
+cmd5340 ret(18) 
+cmd5341 push(2) reg2 
 cmd5343 add(9) reg2 2457 1 
 cmd5347 rmem(15) reg2 reg2 
 cmd5350 add(9) reg2 reg2 reg0 
 cmd5354 wmem(16) reg2 95 
 cmd5357 pop(3) reg2 
-cmd5359 ret(18) 2 
-cmd5361 UNKNOWN COMMAND reg0
+cmd5359 ret(18) 
+cmd5360 push(2) reg0 
 cmd5362 push(2) reg1 
 cmd5364 set(1) reg0 2688 
 cmd5367 set(1) reg1 2 
 cmd5370 call(17) 4977 
 cmd5372 pop(3) reg1 
 cmd5374 pop(3) reg0 
-cmd5376 ret(18) 2 
-cmd5378 UNKNOWN COMMAND reg0
+cmd5376 ret(18) 
+cmd5377 push(2) reg0 
 cmd5379 push(2) reg1 
 cmd5381 set(1) reg0 2692 
 cmd5384 set(1) reg1 3 
 cmd5387 call(17) 4977 
 cmd5389 pop(3) reg1 
 cmd5391 pop(3) reg0 
-cmd5393 ret(18) 2 
-cmd5395 UNKNOWN COMMAND reg0
+cmd5393 ret(18) 
+cmd5394 push(2) reg0 
 cmd5396 push(2) reg1 
 cmd5398 set(1) reg0 2696 
 cmd5401 set(1) reg1 5 
 cmd5404 call(17) 4977 
 cmd5406 pop(3) reg1 
 cmd5408 pop(3) reg0 
-cmd5410 ret(18) 2 
-cmd5412 UNKNOWN COMMAND reg0
+cmd5410 ret(18) 
+cmd5411 push(2) reg0 
 cmd5413 push(2) reg1 
 cmd5415 set(1) reg0 2700 
 cmd5418 set(1) reg1 7 
 cmd5421 call(17) 4977 
 cmd5423 pop(3) reg1 
 cmd5425 pop(3) reg0 
-cmd5427 ret(18) 2 
-cmd5429 UNKNOWN COMMAND reg0
+cmd5427 ret(18) 
+cmd5428 push(2) reg0 
 cmd5430 push(2) reg1 
 cmd5432 set(1) reg0 2704 
 cmd5435 set(1) reg1 9 
 cmd5438 call(17) 4977 
 cmd5440 pop(3) reg1 
 cmd5442 pop(3) reg0 
-cmd5444 ret(18) 2 
-cmd5446 UNKNOWN COMMAND reg0
+cmd5444 ret(18) 
+cmd5445 push(2) reg0 
 cmd5447 push(2) reg1 
 cmd5449 push(2) reg2 
 cmd5451 jf(8) reg7 5605 
@@ -2191,8 +2185,8 @@ cmd5712 jmp(6) 5714
 cmd5714 pop(3) reg2 
 cmd5716 pop(3) reg1 
 cmd5718 pop(3) reg0 
-cmd5720 ret(18) 2 
-cmd5722 UNKNOWN COMMAND reg0
+cmd5720 ret(18) 
+cmd5721 push(2) reg0 
 cmd5723 push(2) reg1 
 cmd5725 push(2) reg2 
 cmd5727 push(2) reg3 
@@ -2231,14 +2225,13 @@ cmd5805 pop(3) reg3
 cmd5807 pop(3) reg2 
 cmd5809 pop(3) reg1 
 cmd5811 pop(3) reg0 
-cmd5813 ret(18) 19 
-cmd5815 UNKNOWN COMMAND 45
-cmd5816 out(19)  
+cmd5813 ret(18) 
+cmd5814 out(19) - 
 cmd5818 call(17) 1518 
 cmd5820 out(19) 
 
-cmd5822 ret(18) 2 
-cmd5824 UNKNOWN COMMAND reg1
+cmd5822 ret(18) 
+cmd5823 push(2) reg1 
 cmd5825 push(2) reg2 
 cmd5827 set(1) reg0 27381 
 cmd5830 set(1) reg1 5846 
@@ -2247,8 +2240,8 @@ cmd5836 call(17) 1458
 cmd5838 set(1) reg0 reg2 
 cmd5841 pop(3) reg2 
 cmd5843 pop(3) reg1 
-cmd5845 ret(18) 2 
-cmd5847 UNKNOWN COMMAND reg3
+cmd5845 ret(18) 
+cmd5846 push(2) reg3 
 cmd5848 push(2) reg4 
 cmd5850 rmem(15) reg3 2732 
 cmd5853 add(9) reg4 reg0 2 
@@ -2258,16 +2251,16 @@ cmd5864 jf(8) reg3 5871
 cmd5867 add(9) reg2 reg2 1 
 cmd5871 pop(3) reg4 
 cmd5873 pop(3) reg3 
-cmd5875 ret(18) 2 
-cmd5877 UNKNOWN COMMAND reg0
+cmd5875 ret(18) 
+cmd5876 push(2) reg0 
 cmd5878 push(2) reg1 
 cmd5880 set(1) reg0 27381 
 cmd5883 set(1) reg1 5893 
 cmd5886 call(17) 1458 
 cmd5888 pop(3) reg1 
 cmd5890 pop(3) reg0 
-cmd5892 ret(18) 2 
-cmd5894 UNKNOWN COMMAND reg3
+cmd5892 ret(18) 
+cmd5893 push(2) reg3 
 cmd5895 add(9) reg3 reg0 2 
 cmd5899 rmem(15) reg3 reg3 
 cmd5902 eq(4) reg3 reg2 reg3 
@@ -2276,8 +2269,8 @@ cmd5909 add(9) reg0 reg0 0
 cmd5913 rmem(15) reg0 reg0 
 cmd5916 call(17) 5814 
 cmd5918 pop(3) reg3 
-cmd5920 ret(18) 2 
-cmd5922 UNKNOWN COMMAND reg1
+cmd5920 ret(18) 
+cmd5921 push(2) reg1 
 cmd5923 push(2) reg2 
 cmd5925 set(1) reg2 reg0 
 cmd5928 set(1) reg0 27381 
@@ -2292,8 +2285,8 @@ cmd5954 jmp(6) 5959
 cmd5956 set(1) reg0 0 
 cmd5959 pop(3) reg2 
 cmd5961 pop(3) reg1 
-cmd5963 ret(18) 2 
-cmd5965 UNKNOWN COMMAND reg1
+cmd5963 ret(18) 
+cmd5964 push(2) reg1 
 cmd5966 set(1) reg1 reg2 
 cmd5969 add(9) reg0 reg0 0 
 cmd5973 rmem(15) reg0 reg0 
@@ -2302,8 +2295,8 @@ cmd5978 pop(3) reg1
 cmd5980 jf(8) reg0 5989 
 cmd5983 set(1) reg2 reg1 
 cmd5986 set(1) reg1 32767 
-cmd5989 ret(18) 2 
-cmd5991 UNKNOWN COMMAND reg1
+cmd5989 ret(18) 
+cmd5990 push(2) reg1 
 cmd5992 push(2) reg2 
 cmd5994 add(9) reg0 reg0 2 
 cmd5998 rmem(15) reg0 reg0 
@@ -2316,28 +2309,24 @@ cmd6017 jmp(6) 6022
 cmd6019 set(1) reg0 1 
 cmd6022 pop(3) reg2 
 cmd6024 pop(3) reg1 
-cmd6026 ret(18) 7 
-cmd6028 UNKNOWN COMMAND reg0
-cmd6029 UNKNOWN COMMAND 6035
+cmd6026 ret(18) 
+cmd6027 jt(7) reg0 6035 
 cmd6030 add(9) reg0 reg1 1 
-cmd6034 ret(18) 7 
-cmd6036 UNKNOWN COMMAND reg1
-cmd6037 UNKNOWN COMMAND 6048
+cmd6034 ret(18) 
+cmd6035 jt(7) reg1 6048 
 cmd6038 add(9) reg0 reg0 32767 
 cmd6042 set(1) reg1 reg7 
 cmd6045 call(17) 6027 
-cmd6047 ret(18) 2 
-cmd6049 UNKNOWN COMMAND reg0
+cmd6047 ret(18) 
+cmd6048 push(2) reg0 
 cmd6050 add(9) reg1 reg1 32767 
 cmd6054 call(17) 6027 
 cmd6056 set(1) reg1 reg0 
 cmd6059 pop(3) reg0 
 cmd6061 add(9) reg0 reg0 32767 
 cmd6065 call(17) 6027 
-cmd6067 ret(18) 11 
-cmd6069 UNKNOWN COMMAND 84
-cmd6070 UNKNOWN COMMAND 101
-cmd6071 UNKNOWN COMMAND 115
+cmd6067 ret(18) 
+cmd6068 mod(11) 84 101 115 
 cmd6072 UNKNOWN COMMAND 116
 cmd6073 UNKNOWN COMMAND 32
 cmd6074 UNKNOWN COMMAND 115
