@@ -470,12 +470,14 @@ def printProgram():
 
 
 def mainEvent():
-    global cursor,maxSize, currentProgram, root, loadStateFlag, saveStateFlag, stateName
+    global cursor,maxSize, currentProgram, root, loadStateFlag, saveStateFlag, stateName,stepCheckBox
     while cursor <= maxSize/2:
         master.update()
         handleCommand(currentProgram[cursor])
         cursor= cursor +1
         updateUI()
+        if cursor==5491:
+            stepCheckBox.select()
         waitForStep()
         if True==loadStateFlag:
             loadFiles(stateName.get())
