@@ -2309,7 +2309,9 @@ cmd6017 jmp(6) 6022
 cmd6019 set(1) reg0 1 
 cmd6022 pop(3) reg2 
 cmd6024 pop(3) reg1 
-cmd6026 ret(18) 
+cmd6026 ret(18)
+
+ 
 cmd6027 jt(7) reg0 6035 
 cmd6030 add(9) reg0 reg1 1 
 cmd6034 ret(18) 
@@ -2326,6 +2328,8 @@ cmd6059 pop(3) reg0
 cmd6061 add(9) reg0 reg0 32767 
 cmd6065 call(17) 6027 
 cmd6067 ret(18) 
+
+
 cmd6068 mod(11) 84 101 115 
 cmd6072 UNKNOWN COMMAND 116
 cmd6073 UNKNOWN COMMAND 32

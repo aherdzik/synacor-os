@@ -1,0 +1,7 @@
+Sample walkthrough= reg0=3, reg1=1, 
+Initial stack= reg7[reg1=1] + ((reg7-1) * reg7) + ... + 1 * reg7
+initial count= reg7+1
+add reg7 ,eats 1s gets you to 2s (reg7 + 1 + reg7)
+2 gets eaten, adds reg+1 
+2 gets eaten, adds reg+1 (reg7 +1 + reg7 + (reg7* (reg7+1))
+3 gets eaten, adds
