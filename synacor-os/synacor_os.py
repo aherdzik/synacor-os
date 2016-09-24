@@ -272,7 +272,7 @@ def printToScreen(line):
 def initGUI():
     global inputText, master, e1, registerInputs,register,UIUpdate,stateName,stackText, cursorText, stepCheckBox, stepUpdateChecked 
     master = Tk()
-    
+    master.title("Synacor Challenge")
     #left frame area
     leftFrame= Frame(master,width=2,bd=1, relief=SUNKEN)
     leftFrame.pack(side=LEFT, fill=BOTH, expand=1)
@@ -476,7 +476,7 @@ def mainEvent():
         handleCommand(currentProgram[cursor])
         cursor= cursor +1
         updateUI()
-        if cursor==5491:
+        if cursor==5491 or cursor==5486:
             stepCheckBox.select()
         waitForStep()
         if True==loadStateFlag:
